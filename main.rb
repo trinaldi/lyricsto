@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'byebug'
 require './crawler'
 
@@ -19,7 +21,7 @@ class LyricsTo
     matchify(html.css('b'), artist)
   end
 
-  def get_lyrics
+  def fetch_lyrics
     html.xpath('//div[@class="ringtone"]//following-sibling::div[1]').text
   end
 
@@ -28,7 +30,7 @@ class LyricsTo
   end
 
   def lyrics
-    words = get_lyrics
+    words = fetch_lyrics
     split_newline(words).each { |word| puts word }
   end
 end

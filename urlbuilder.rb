@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module URLBuilder
   def host
     'https://www.azlyrics.com/lyrics'
