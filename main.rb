@@ -2,6 +2,8 @@
 
 require 'byebug'
 require './crawler'
+require './menu'
+require 'slop'
 
 class LyricsTo
   include Crawler
@@ -33,14 +35,12 @@ class LyricsTo
     words = fetch_lyrics
     split_newline(words).each { |word| puts word }
   end
+
+  def print
+    puts "#{song_title} by #{artist_name}"
+    lyrics
+  end
 end
 
-artist = ARGV[0]
-song = ARGV[1]
-exit 1 unless artist || song
-
-lyricsto = LyricsTo.new(artist: artist, song: song)
-
-lyricsto.artist_name
-lyricsto.song_title
-lyricsto.lyrics
+options = Menu.new(artist: ARGV[0], song: ARGV[1]).create
+LyricsTo.new(artist: options['a'], song: options['s']).print
