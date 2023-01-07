@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require './urlbuilder'
 require 'nokogiri'
 require 'open-uri'
@@ -6,12 +8,11 @@ module Crawler
   include URLBuilder
 
   def response(artist, song)
-    begin
-      Nokogiri::HTML5(URI.open(full_url(artist, song)))
-    rescue
-      puts 'Ops, não encontrei :('
-      exit 1
-    end
+    uri = URI.parse(full_url(artist, song))
+    Nokogiri::HTML5(uri.open)
+  rescue StandardError
+    puts 'Ops, não encontrei :('
+    exit 1
   end
 
   def split_newline(text)
