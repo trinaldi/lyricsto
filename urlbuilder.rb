@@ -4,12 +4,7 @@ module URLBuilder
   end
 
   def urlize(text)
-    begin
-      text.downcase.split.reject(&:empty?).join('')
-    rescue
-      puts "Enter Artist and Song'"
-      exit 1
-    end
+    text.downcase.split.reject(&:empty?).join('')
   end
 
   def build_band_song(band, song)
