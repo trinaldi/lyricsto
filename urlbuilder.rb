@@ -1,10 +1,15 @@
 module URLBuilder
   def host
-   'https://www.azlyrics.com/lyrics' 
+    'https://www.azlyrics.com/lyrics'
   end
 
   def urlize(text)
-    text.downcase.split.reject(&:empty?).join('')
+    begin
+      text.downcase.split.reject(&:empty?).join('')
+    rescue
+      puts "Enter Artist and Song'"
+      exit 1
+    end
   end
 
   def build_band_song(band, song)
