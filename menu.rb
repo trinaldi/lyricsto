@@ -1,3 +1,5 @@
+require 'slop'
+
 class Menu
   attr_reader :artist, :song
 

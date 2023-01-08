@@ -1,6 +1,15 @@
+require './sources/azlyrics'
+
 # frozen_string_literal: true
 
-module URLBuilder
+class URLBuilder
+  attr_reader :artist, :song
+
+  def initialize(artist:, song:)
+    @artist = artist
+    @song = song
+  end
+
   def host
     'https://www.azlyrics.com/lyrics'
   end
@@ -9,14 +18,19 @@ module URLBuilder
     text.downcase.split.reject(&:empty?).join('')
   end
 
-  def build_band_song(band, song)
-    band = urlize(band)
+  def build_artist_song(artist, song)
+    artist = urlize(artist)
     song = urlize(song)
-    "#{band}/#{song}"
+    "#{artist}/#{song}"
   end
 
-  def full_url(band, song)
-    band_song = build_band_song(band, song)
-    "#{host}/#{band_song}.html"
+  def full_url(artist, song)
+    artist_song = build_artist_song(artist, song)
+    "#{host}/#{artist_song}.html"
+  end
+
+  def broadcast
+    url = full_url(artist, song)
+    AZLyrics.new(artist: artist, song: song, url: url).subscribe
   end
 end
