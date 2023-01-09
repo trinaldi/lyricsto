@@ -1,6 +1,7 @@
 # LyricsTo
 
-Fetch and display lyrics from sources.
+Fetch and display lyrics from sources.  
+FWIW, this should be a simple script...
 
 ## Requirements
 
