@@ -1,3 +1,7 @@
+# frozen_string_literal: true
+
+require 'slop'
+
 class Menu
   attr_reader :artist, :song
 
