@@ -1,21 +1,16 @@
+# frozen_string_literal: true
+
 require './crawler'
 
 class AZLyrics
-  include Crawler
-  attr_reader :artist, :song, :url
+  attr_reader :html
 
-  def initialize(artist:, song:, url:)
-    @artist = artist
-    @song = song
-    @url = url
+  def initialize(html:)
+    @html = html
   end
 
   def subscribe
-    print    
-  end
-
-  def html
-    response(url)
+    print
   end
 
   def artist_name
@@ -36,7 +31,6 @@ class AZLyrics
   end
 
   def print
-    puts "#{song_title} by #{artist_name}"
     lyrics
   end
 

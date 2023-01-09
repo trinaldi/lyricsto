@@ -3,8 +3,8 @@
 require 'nokogiri'
 require 'open-uri'
 
-module Crawler
-  def response(url)
+class Crawler
+  def response(url:)
     uri = URI.parse(url)
     Nokogiri::HTML5(uri.open)
   rescue StandardError

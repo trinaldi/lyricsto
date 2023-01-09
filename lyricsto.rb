@@ -4,7 +4,6 @@ require './menu'
 require './urlbuilder'
 
 class LyricsTo
-
   attr_reader :artist, :song
 
   def initialize(artist:, song:)

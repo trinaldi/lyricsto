@@ -1,4 +1,7 @@
+# frozen_string_literal: true
+
 require './sources/azlyrics'
+require './crawler'
 
 # frozen_string_literal: true
 
@@ -15,7 +18,7 @@ class URLBuilder
   end
 
   def urlize(text)
-    text.downcase.split.reject(&:empty?).join('')
+    text.downcase.split.reject(&:empty?).join
   end
 
   def build_artist_song(artist, song)
@@ -31,6 +34,7 @@ class URLBuilder
 
   def broadcast
     url = full_url(artist, song)
-    AZLyrics.new(artist: artist, song: song, url: url).subscribe
+    html = Crawler.new.response(url: url)
+    AZLyrics.new(html: html).subscribe
   end
 end
