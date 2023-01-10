@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
-require './sources/azlyrics'
-require './crawler'
+require_relative 'sources/azlyrics'
+require_relative 'crawler'
 
 # frozen_string_literal: true
 

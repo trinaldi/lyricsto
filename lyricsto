@@ -1,8 +1,8 @@
 #!/usr/bin/env ruby
 # frozen_string_literal: true
 
-require './menu'
-require './urlbuilder'
+require_relative 'menu'
+require_relative 'urlbuilder'
 
 class LyricsTo
   attr_reader :artist, :song

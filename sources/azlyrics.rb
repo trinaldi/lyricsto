@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require './crawler'
+require_relative '../crawler'
 
 class AZLyrics
   attr_reader :html
