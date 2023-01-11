@@ -12,10 +12,10 @@ class LyricsTo
     @song = song
   end
 
-  def call
+  def build_url
     URLBuilder.new(artist: artist, song: song).broadcast
   end
 end
 
 options = Menu.new(artist: ARGV[0], song: ARGV[1]).create
-LyricsTo.new(artist: options['a'], song: options['s']).call
+LyricsTo.new(artist: options['a'], song: options['s']).build_url

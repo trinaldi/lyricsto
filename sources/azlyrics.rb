@@ -9,38 +9,23 @@ class AZLyrics
     @html = html
   end
 
-  def subscribe
-    print
-  end
-
-  def artist_name
-    matchify(html.css('b'), artist)
-  end
-
-  def fetch_lyrics
+  def parse_lyrics
     html.xpath('//div[@class="ringtone"]//following-sibling::div[1]').text
   end
 
-  def song_title
-    matchify(html.css('b'), song)
-  end
-
-  def lyrics
-    words = fetch_lyrics
+  def display_lyrics
+    words = parse_lyrics
     split_newline(words).each { |word| puts word }
   end
 
-  def print
-    lyrics
+  def subscribe
+    parse_lyrics
+    display_lyrics
   end
 
   private
 
   def split_newline(text)
     text.split("\n")
-  end
-
-  def matchify(css, match)
-    css.text.match(/#{match}/i)
   end
 end
