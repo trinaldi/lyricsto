@@ -22,7 +22,7 @@ class LyricsTo
   end
 end
 
-options = Menu.new(artist: ARGV[0], song: ARGV[1]).create
+opts = Menu.new(artist: ARGV[0], song: ARGV[1]).create
 
-LyricsTo.new(artist: options['a'], song: options['s']).genius if options.description?
-LyricsTo.new(artist: options['a'], song: options['s']).azlyrics
+LyricsTo.new(artist: opts['a'], song: opts['s']).genius if opts.description?
+LyricsTo.new(artist: opts['a'], song: opts['s']).azlyrics
