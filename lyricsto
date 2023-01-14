@@ -3,6 +3,7 @@
 
 require_relative 'menu'
 require_relative './sources/azlyrics'
+require_relative './sources/genius'
 
 class LyricsTo
   attr_reader :artist, :song
@@ -15,7 +16,13 @@ class LyricsTo
   def azlyrics
     Sources::AZLyrics.new(artist: artist, song: song).fetch_lyrics
   end
+
+  def genius
+    Sources::Genius.new(artist: artist, song: song).fetch_song_url
+  end
 end
 
 options = Menu.new(artist: ARGV[0], song: ARGV[1]).create
+
+LyricsTo.new(artist: options['a'], song: options['s']).genius if options.description?
 LyricsTo.new(artist: options['a'], song: options['s']).azlyrics
