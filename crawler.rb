@@ -2,6 +2,7 @@
 
 require 'httparty'
 require 'nokogiri'
+require 'byebug'
 
 module Crawler
   def self.included(base)
