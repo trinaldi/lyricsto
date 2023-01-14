@@ -25,11 +25,19 @@ module Sources
     def description(description_url)
       html = fetch_response(url: description_url, type: :html)
       words = html.css('div[class*="ExpandableContent__Content"] p').text
-      puts "\nSong Description by Genius"
-      display(words)
+      display_description(words)
     end
 
     private
+
+    def title
+      "\nSong description by Genius:\n"
+    end
+
+    def display_description(words)
+      title
+      puts text_splitter(words)
+    end
 
     def song_url(json)
       json.dig('response', 'sections', 0, 'hits', 0, 'result', 'url')
@@ -44,8 +52,8 @@ module Sources
       "#{HOST}&q=#{query}"
     end
 
-    def display(words)
-      split_newline(words).each { |word| puts word }
+    def text_splitter(text, line_size = 80)
+      text.gsub(/(?:.{1,#{line_size}}|\S+)\K(?:$|\s)/, "\n")
     end
   end
 end

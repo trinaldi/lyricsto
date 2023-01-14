@@ -24,5 +24,10 @@ end
 
 opts = Menu.new(artist: ARGV[0], song: ARGV[1]).create
 
-LyricsTo.new(artist: opts['a'], song: opts['s']).genius if opts.description?
-LyricsTo.new(artist: opts['a'], song: opts['s']).azlyrics
+lyrics_to = LyricsTo.new(artist: opts['a'], song: opts['s'])
+
+case opts['d']
+when true then lyrics_to.genius
+else
+  lyrics_to.azlyrics
+end
