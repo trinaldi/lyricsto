@@ -7,7 +7,12 @@ FWIW, this should be a simple script...
 
 `Ruby`
 
-Gems: `Nokogiri`
+Gems: 
+
+```
+Nokogiri
+Slup
+```
 
 ## Usage
 
