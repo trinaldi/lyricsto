@@ -2,30 +2,53 @@
 
 require_relative '../crawler'
 
-class AZLyrics
-  attr_reader :html
+module Sources
+  class AZLyrics
+    include Crawler
 
-  def initialize(html:)
-    @html = html
-  end
+    HOST = 'https://www.azlyrics.com/lyrics'
 
-  def parse_lyrics
-    html.xpath('//div[@class="ringtone"]//following-sibling::div[1]').text
-  end
+    attr_reader :artist, :song
 
-  def display_lyrics
-    words = parse_lyrics
-    split_newline(words).each { |word| puts word }
-  end
+    def initialize(artist:, song:)
+      @artist = artist
+      @song = song
+    end
 
-  def subscribe
-    parse_lyrics
-    display_lyrics
-  end
+    def fetch_lyrics
+      url = full_url(artist, song)
+      html = fetch_response(url: url, type: :html)
+      words = parse_lyrics(html)
+      display_lyrics(words)
+    end
 
-  private
+    private
 
-  def split_newline(text)
-    text.split("\n")
+    def build_artist_song(artist, song)
+      artist = arg_to_path(artist)
+      song = arg_to_path(song)
+      "#{artist}/#{song}"
+    end
+
+    def arg_to_path(text)
+      text.downcase.split.reject(&:empty?).join
+    end
+
+    def split_newline(text)
+      text.split("\n")
+    end
+
+    def full_url(artist, song)
+      artist_song = build_artist_song(artist, song)
+      "#{HOST}/#{artist_song}.html"
+    end
+
+    def parse_lyrics(body)
+      body.xpath('//div[@class="ringtone"]//following-sibling::div[1]').text
+    end
+
+    def display_lyrics(words)
+      split_newline(words).each { |word| puts word }
+    end
   end
 end
