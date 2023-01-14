@@ -5,11 +5,12 @@ FWIW, this should be a simple script...
 
 ## Requirements
 
-`Ruby`
+`Ruby 3`
 
 Gems: 
 
 ```
+HTTParty
 Nokogiri
 Slup
 ```
@@ -22,8 +23,13 @@ The arguments:
 `-a | --artist [artist name]`  
 As the name implies, where you set the artist name
 
-`-s | --song [song_title`  
+`-s | --song [song_title]`  
 Again, as implied, where you set the song title.
+
+`-d | --description`  
+Fetch Genius website for the song description. This is a search on their website 
+so keep in mind that some results are actually false positives
+
 
 ## Contribute  
 
