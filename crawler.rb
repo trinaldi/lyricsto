@@ -8,17 +8,17 @@ module Crawler
     base.extend(ClassMethods)
   end
 
-  def response(url:, config: {})
-    response(url: url, config: config)
+  def fetch_response(url:, type:, config: {})
+    self.class.request(url: url, config: config, type: type)
   end
 
   module ClassMethods
-    def response(url:, config: {})
+    def request(url:, type:, config: {})
       response = HTTParty.get(url, {
                                 headers: config[:headers]
                               })
       body = response.body
-      parse_response_type(body, config[:type])
+      parse_response_type(body: body, response_type: type)
     rescue StandardError
       puts 'Oops! I can\'t find this one :('
       exit 1
