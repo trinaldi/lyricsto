@@ -30,12 +30,14 @@ module Sources
 
     private
 
-    def title
-      "\nSong description by Genius:\n"
+    def draw_title
+      puts ''
+      puts 'Song description by Genius:'
+      puts ''
     end
 
     def display_description(words)
-      title
+      draw_title
       puts text_splitter(words)
     end
 
