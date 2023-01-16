@@ -45,10 +45,6 @@ module Sources
       json.dig('response', 'sections', 0, 'hits', 0, 'result', 'url')
     end
 
-    def split_newline(text)
-      text.split("\n")
-    end
-
     def full_url(artist, song)
       query = "#{artist} #{song}"
       "#{HOST}&q=#{query}"
