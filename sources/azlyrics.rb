@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+require 'byebug'
 require_relative '../crawler'
 
 module Sources
@@ -44,7 +45,7 @@ module Sources
     end
 
     def parse_lyrics(body)
-      body.xpath('//div[@class="ringtone"]//following-sibling::div[1]').text
+      check_content(body.xpath('//div[@class="ringtone"]//following-sibling::div[1]').text)
     end
 
     def display_lyrics(words)

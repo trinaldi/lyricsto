@@ -25,6 +25,7 @@ module Sources
     def description(description_url)
       html = fetch_response(url: description_url, type: :html)
       words = html.css('div[class*="ExpandableContent__Content"] p').text
+      check_content(words)
       display_description(words)
     end
 

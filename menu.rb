@@ -16,15 +16,17 @@ class Menu
       o.string '-s', '--song', 'Song title', required: true
       o.boolean '-d', '--description', "Genius' song description", default: false
     end
-  rescue Slop::MissingRequiredOption
-    puts 'Please enter an artist AND a song'
-    exit 1
-  rescue Slop::UnknownOption => e
-    error(e)
+  rescue Slop::MissingRequiredOption; no_artist_or_song
+  rescue Slop::UnknownOption => e; error(e)
   end
 
   def error(error)
     puts error.to_s.capitalize
+    exit 1
+  end
+
+  def no_artist_or_song
+    puts 'Please enter an artist AND a song'
     exit 1
   end
 end
