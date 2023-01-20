@@ -1,10 +1,11 @@
 # frozen_string_literal: true
 
-require 'byebug'
 require 'httparty'
 require 'nokogiri'
 
 module Crawler
+  class CrawlerError < StandardError;  end
+
   def self.included(base)
     base.extend(ClassMethods)
   end
@@ -24,14 +25,10 @@ module Crawler
 
   module ClassMethods
     def request(url:, type:, config: {})
-      response = HTTParty.get(url, {
-                                headers: config[:headers]
-                              })
+      response = HTTParty.get(url, { headers: config[:headers] })
       body = response.body
       parse_response_type(body: body, response_type: type)
-    rescue StandardError
-      puts 'Oops, something went wrong =/'
-      exit 1
+    rescue StandardError; oops
     end
 
     def parse_response_type(body:, response_type:)
@@ -41,6 +38,11 @@ module Crawler
       when :json
         JSON.parse(body)
       end
+    end
+
+    def oops
+      puts 'Oops, something went wrong =/'
+      exit 1
     end
   end
 end
