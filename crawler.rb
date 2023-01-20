@@ -11,7 +11,7 @@ module Crawler
   end
 
   def check_content(content)
-    if content.empty?
+    if content.empty? || content.nil?
       puts 'Could not find anything :('
       exit 0
     end
