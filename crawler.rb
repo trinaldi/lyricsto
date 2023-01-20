@@ -4,7 +4,7 @@ require 'httparty'
 require 'nokogiri'
 
 module Crawler
-  class CrawlerError < StandardError;  end
+  class CrawlerError < StandardError; end
 
   def self.included(base)
     base.extend(ClassMethods)
