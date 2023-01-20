@@ -14,6 +14,8 @@ class Menu
     Slop.parse do |o|
       o.string '-a', '--artist', 'Artist/Band name', required: true
       o.string '-s', '--song', 'Song title', required: true
+      o.boolean '-z', '--azlyrics', 'Source: AZLyrics'
+      o.boolean '-f', '--lyricsfreak', 'Source: LyricsFreak'
       o.boolean '-d', '--description', "Genius' song description", default: false
     end
   rescue Slop::MissingRequiredOption; no_artist_or_song
