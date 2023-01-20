@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+require 'byebug'
 require_relative '../crawler'
 
 module Sources
@@ -18,7 +19,7 @@ module Sources
     def fetch_lyrics_url
       url = full_url(artist, song)
       html = fetch_response(url: url, type: :html, config: { headers: spoof_user_agent })
-
+      check_content(html.css('.song'))
       lyrics_path = html.css('.song').attr('href').value
       "#{HOST}#{lyrics_path}"
     end
