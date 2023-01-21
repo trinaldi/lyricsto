@@ -11,5 +11,5 @@ end
 
 RSpec.configure do |c|
   c.silence_filter_announcements = true
-  c.before { allow($stdout).to receive(:puts) }
+  # c.before { allow($stdout).to receive(:puts) }
 end
