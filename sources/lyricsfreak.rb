@@ -1,9 +1,10 @@
 # frozen_string_literal: true
 
 require_relative '../crawler'
+require_relative './source'
 
 module Sources
-  class LyricsFreak
+  class LyricsFreak < Source
     include Crawler
 
     HOST = 'https://www.lyricsfreak.com'
@@ -16,8 +17,10 @@ module Sources
     end
 
     def fetch_lyrics_url
-      url = full_url(artist, song)
-      html = fetch_response(url: url, type: :html, config: { headers: spoof_user_agent })
+      search_url = "#{HOST}/search.php"
+      html = fetch_response(url: search_url, type: :html, config:
+                            { headers: spoof_user_agent,
+                              query: { q: "#{artist} #{song}" } })
       check_content(html.css('.song'))
       lyrics_path = html.css('.song').attr('href').value
       "#{HOST}#{lyrics_path}"
@@ -26,30 +29,8 @@ module Sources
     def fetch_lyrics
       url = fetch_lyrics_url
       html = fetch_response(url: url, type: :html, config: { headers: spoof_user_agent })
-      words = html.css('div[data-container-id="lyrics"]').text.strip!
+      words = check_content(html.css('div[data-container-id="lyrics"]').text.strip!)
       display_lyrics(words)
-    end
-
-    private
-
-    def full_url(artist, song)
-      "#{HOST}/search.php?q=#{artist} #{song}"
-    end
-
-    def spoof_user_agent
-      {
-        'User-Agent':
-        'Mozilla/5.0 (Macintosh; Intel Mac OS X 13_1)' \
-        'AppleWebKit/537.36 (KHTML, like Gecko) Chrome/109.0.0.0 Safari/537.36'
-      }
-    end
-
-    def split_newline(text)
-      text.split("\n")
-    end
-
-    def display_lyrics(words)
-      split_newline(words).each { |word| puts word }
     end
   end
 end

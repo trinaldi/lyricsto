@@ -8,3 +8,5 @@ AllCops:
     - 'bin/*'
 Style/Documentation:
   Enabled: false
+Lint/MissingSuper:
+  Enabled: false

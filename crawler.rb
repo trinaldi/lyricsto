@@ -25,7 +25,7 @@ module Crawler
 
   module ClassMethods
     def request(url:, type:, config: {})
-      response = HTTParty.get(url, { headers: config[:headers] })
+      response = HTTParty.get(url, { headers: config[:headers], query: config[:query] })
       body = response.body
       parse_response_type(body: body, response_type: type)
     rescue StandardError; oops
