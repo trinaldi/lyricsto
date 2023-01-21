@@ -1,10 +1,12 @@
 # frozen_string_literal: true
 
 require_relative '../crawler'
+require_relative './source'
 
 module Sources
   class AZLyrics
     include Crawler
+    include Source
 
     HOST = 'https://www.azlyrics.com/lyrics'
 

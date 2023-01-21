@@ -4,8 +4,9 @@ require_relative '../crawler'
 require_relative './source'
 
 module Sources
-  class Genius < Source
+  class Genius
     include Crawler
+    include Source
 
     HOST = 'https://genius.com/api/search/multi'
 
