@@ -11,7 +11,7 @@ module Crawler
   end
 
   def check_content(content)
-    if content.empty? || content.nil?
+    if content.nil? || content.empty?
       puts 'Could not find anything :('
       exit 0
     end
@@ -19,12 +19,8 @@ module Crawler
     content
   end
 
-  def fetch_response(url:, type:, config: {})
-    self.class.request(url: url, config: config, type: type)
-  end
-
   module ClassMethods
-    def request(url:, type:, config: {})
+    def fetch_response(url:, type:, config: {})
       response = HTTParty.get(url, { headers: config[:headers], query: config[:query] })
       body = response.body
       parse_response_type(body: body, response_type: type)
@@ -44,5 +40,9 @@ module Crawler
       puts 'Oops, something went wrong =/'
       exit 1
     end
+  end
+
+  def fetch_response(url:, type:, config: {})
+    self.class.fetch_response(url: url, config: config, type: type)
   end
 end

@@ -14,7 +14,7 @@ module Source
   end
 
   def text_splitter(text, line_size = 80)
-    text.gsub(/(?:.{1,#{line_size}}|\S+)\K(?:$|\s)/, "\n")
+    puts text.gsub(/(?:.{1,#{line_size}}|\S+)\K(?:$|\s)/, "\n")
   end
 
   def display_lyrics(words)
