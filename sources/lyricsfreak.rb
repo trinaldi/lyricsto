@@ -6,7 +6,7 @@ require_relative './source'
 module Sources
   class LyricsFreak
     include Crawler
-    include Sources
+    include Source
 
     HOST = 'https://www.lyricsfreak.com'
 
