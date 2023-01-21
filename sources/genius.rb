@@ -41,7 +41,7 @@ module Sources
 
     def display_description(words)
       draw_title
-      puts text_splitter(words)
+      text_splitter(words)
     end
 
     def song_url(json)
