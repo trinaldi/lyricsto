@@ -1,12 +1,13 @@
 # frozen_string_literal: true
 
 require_relative '../crawler'
+require_relative './source'
 
 module Sources
-  class Genius
+  class Genius < Source
     include Crawler
 
-    HOST = 'https://genius.com/api/search/multi?per_page=1'
+    HOST = 'https://genius.com/api/search/multi'
 
     attr_reader :artist, :song
 
@@ -16,8 +17,8 @@ module Sources
     end
 
     def fetch_song_url
-      url = full_url(artist, song)
-      json = fetch_response(url: url, type: :json)
+      json = fetch_response(url: HOST, type: :json,
+                            config: { query: { q: "#{artist} #{song}", per_page: 1 } })
       description_url = song_url(json)
       description(description_url)
     end
@@ -44,15 +45,6 @@ module Sources
 
     def song_url(json)
       json.dig('response', 'sections', 0, 'hits', 0, 'result', 'url')
-    end
-
-    def full_url(artist, song)
-      query = "#{artist} #{song}"
-      "#{HOST}&q=#{query}"
-    end
-
-    def text_splitter(text, line_size = 80)
-      text.gsub(/(?:.{1,#{line_size}}|\S+)\K(?:$|\s)/, "\n")
     end
   end
 end
