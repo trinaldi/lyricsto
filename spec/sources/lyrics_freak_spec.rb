@@ -24,7 +24,7 @@ describe Sources::LyricsFreak do
       end
 
       it 'returns the song url' do
-        expect { response.fetch_lyrics }.to output(/Help!/i).to_stdout
+        expect { response.fetch_lyrics }.to puts_to_stdout(/Help!/i)
       end
     end
   end

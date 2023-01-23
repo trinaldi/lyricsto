@@ -7,7 +7,7 @@ describe Sources::Source do
   let(:dummy) { Class.new.extend(described_class) }
 
   specify '#spoof_user_agent' do
-    expect(dummy.spoof_user_agent).to include(match(/User-agent/i))
+    expect(dummy.spoof_user_agent).to contain_content_matching('User-Agent')
   end
 
   describe '#split_newline' do
@@ -27,7 +27,7 @@ describe Sources::Source do
       let(:line_size) { text.length / 2 }
 
       it 'will break it in line_number chars each line' do
-        expect { dummy.text_splitter(text, line_size) }.to output("I am\nthe\nWalrus\n").to_stdout
+        expect { dummy.text_splitter(text, line_size) }.to puts_to_stdout("I am\nthe\nWalrus\n")
       end
     end
   end
@@ -38,7 +38,7 @@ describe Sources::Source do
       let(:text) { "Hello Goodbye\n" }
 
       it 'will output each item to stdout' do
-        expect { dummy.display_lyrics(string_array) }.to output(text).to_stdout
+        expect { dummy.display_lyrics(string_array) }.to puts_to_stdout(text)
       end
     end
   end

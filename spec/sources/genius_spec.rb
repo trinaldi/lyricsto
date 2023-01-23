@@ -24,7 +24,7 @@ describe Sources::Genius do
       end
 
       it 'returns the song url' do
-        expect { response.fetch_song_url }.to output(/Help!/i).to_stdout
+        expect { response.fetch_song_url }.to puts_to_stdout(/Help!/i)
       end
     end
   end

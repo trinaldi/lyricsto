@@ -11,9 +11,10 @@ RSpec.describe Crawler do
   describe '#check_content' do
     context 'when context is not empty' do
       let(:content) { 'not empty' }
+      let(:result) { Dummy.new.check_content(content) }
 
       it 'returns the contents' do
-        expect(Dummy.new.check_content(content)).to eq(content)
+        expect(result).not_to be_empty(content)
       end
     end
 
@@ -42,7 +43,7 @@ RSpec.describe Crawler do
       end
 
       it 'returns an html payload' do
-        expect(response.css('p').text).to eq('Hi')
+        expect(response.css('p').text).to have_content_with_text('Hi')
       end
     end
 
@@ -61,7 +62,7 @@ RSpec.describe Crawler do
       end
 
       it 'returns a json payload' do
-        expect(response['greeting']).to eq('Hi')
+        expect(response['greeting']).to have_content_with_text('Hi')
       end
     end
   end

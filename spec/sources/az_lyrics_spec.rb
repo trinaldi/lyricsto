@@ -22,7 +22,7 @@ describe Sources::AZLyrics do
       end
 
       it 'returns the correct lyrics' do
-        expect(response).to include(match(/I need somebody/i))
+        expect(response).to contain_content_matching('Help me if you can, I\'m feeling down')
       end
     end
   end
