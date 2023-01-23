@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require 'webmock/rspec'
+require 'integration/crawler_spec'
 
 WebMock.disable_net_connect!(allow_localhost: true)
 
@@ -12,5 +13,6 @@ end
 
 RSpec.configure do |c|
   c.silence_filter_announcements = true
+  c.include CrawlerMatchers
   # c.before { allow($stdout).to receive(:puts) }
 end
