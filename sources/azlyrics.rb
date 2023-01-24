@@ -36,10 +36,6 @@ module Sources
       text.downcase.split.reject(&:empty?).join
     end
 
-    def split_newline(text)
-      text.split("\n")
-    end
-
     def full_url(artist, song)
       artist_song = build_artist_song(artist, song)
       "#{HOST}/#{artist_song}.html"
@@ -47,10 +43,6 @@ module Sources
 
     def parse_lyrics(body)
       check_content(body.xpath('//div[@class="ringtone"]//following-sibling::div[1]').text)
-    end
-
-    def display_lyrics(words)
-      split_newline(words).each { |word| puts word }
     end
   end
 end
