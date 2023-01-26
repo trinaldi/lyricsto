@@ -34,7 +34,6 @@ module Sources
     private
 
     def draw_title
-      puts ''
       puts 'Song description by Genius:'
       puts ''
     end
